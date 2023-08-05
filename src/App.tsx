@@ -55,8 +55,8 @@ const onRemoveCate =  (id: string)=>{
     <div className="App">
     <Routes>
       <Route path="/" element={<Layout/>}>
-        <Route path="" element={<HomePage/>}/>
-        <Route path="/products/:id" element={<DetailPage />} />
+        <Route path="" element={<HomePage  products={productState.products} />}/>
+        <Route path="/products/:id" element={<DetailPage categories={categoryState.categories}  products={productState.products} />} />
       </Route>
       <Route path='/admin'>
         <Route index element={<DashBoard />} />

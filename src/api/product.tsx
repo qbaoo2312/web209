@@ -1,3 +1,4 @@
+
 import { IProduct } from "../interfaces/product"
 import instance from "./instance"
 
@@ -6,6 +7,7 @@ const getAllProduct = () => {
 }
 const getOneProduct = (id: string) => {
     return instance.get(`/products/${id}`)
+
 }
 const addProduct = (product: IProduct) => {
     return instance.post('/products', product)
@@ -14,6 +16,6 @@ const deleteProduct = (id: string) => {
     return instance.delete(`/products/${id}`)
 }
 const updateProduct = (product: IProduct) => {
-    return instance.patch(`/products/${product.id}`, product)
+    return instance.patch(`/products/${product._id}`, product)
 }
 export { getAllProduct, getOneProduct, addProduct, deleteProduct, updateProduct }

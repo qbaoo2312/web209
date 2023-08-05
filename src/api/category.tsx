@@ -15,6 +15,6 @@ const delCategory = (id:string) => {
     return instance.delete(`categories/${id}`)
 }
 const editCategory = (category: ICategory) => {
-    return instance.patch(`categories/${category.id}`, category)
+    return instance.patch(`categories/${category._id}`, category)
 }
 export {getAllCategory, getOneCategory, delCategory, addCategory, editCategory}

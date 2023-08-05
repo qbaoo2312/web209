@@ -24,7 +24,7 @@ const UpdateProductPage = (props: IProps) => {
   const { id } = useParams()
   const navigate = useNavigate()
   useEffect(() => {
-    setProduct(props.products.find((product: IProduct) => product.id === String(id)))
+    setProduct(props.products.find((product: IProduct) => product._id === String(id)))
   }
     , [props, id])
 
@@ -36,7 +36,7 @@ const UpdateProductPage = (props: IProps) => {
 
   const setFields = () => {
     form.setFieldsValue({
-      id: product?.id,
+      id: product?._id,
       name: product?.name,
       price: product?.price,
       description: product?.description,
@@ -99,7 +99,7 @@ const UpdateProductPage = (props: IProps) => {
         >
           <Select  mode='multiple'>
             {props.categories.map((item, index) => {
-              return <Select.Option key={index} value={item.id}>{item.name}</Select.Option>
+              return <Select.Option key={index} value={item._id}>{item.name}</Select.Option>
             })}
           </Select>
         </Form.Item>

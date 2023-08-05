@@ -9,7 +9,7 @@ import HandleCateId from '../../../Common/HandleCateId';
 
 interface DataType {
     key: string | number;
-    id: string;
+    _id: string;
     name: string;
     description: string;
     price: number,
@@ -29,7 +29,7 @@ console.log(props.categories);
             title: 'Product Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => <Link to={`/products/${record.id}`} >{text}</Link>,
+            render: (text, record) => <Link to={`/products/${record._id}`} >{text}</Link>,
         },        
         {
             title: 'Product price',
@@ -62,8 +62,8 @@ console.log(props.categories);
             render: (record) => (
 
                 <Space size="middle">
-                    <Button type="primary" style={{ backgroundColor: 'red' }} onClick={() => removeProduct(record.id)}>Remove</Button>
-                    <Button style={{ backgroundColor: 'darkblue' }} type="primary" ><Link to={`/admin/products/${record.id}/update`}>Update</Link></Button>
+                    <Button type="primary" style={{ backgroundColor: 'red' }} onClick={() => removeProduct(record._id)}>Remove</Button>
+                    <Button style={{ backgroundColor: 'darkblue' }} type="primary" ><Link to={`/admin/products/${record._id}/update`}>Update</Link></Button>
                 </Space>
             ),
         },
@@ -71,7 +71,7 @@ console.log(props.categories);
 
     const data: DataType[] = props.products.map((item: IProduct) => {
         return {
-            key: item.id,
+            key: item._id,
             ...item
 
         }

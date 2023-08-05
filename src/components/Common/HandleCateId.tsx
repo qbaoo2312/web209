@@ -8,7 +8,7 @@ const HandleCateId = (props: IPropsHandleCateId) => {
   console.log(props.cates);
   const cateNames: string[] = [];
   props.cates.forEach((categoryId) => {
-    const category = props.categories.find((cate) => String(cate.id) === String(categoryId));
+    const category = props.categories.find((cate) => String(cate._id) === String(categoryId));
     if (category) {
       cateNames.push(category.name);
     }

@@ -6,7 +6,7 @@ import { ICategory } from '../../../../interfaces/category';
 
 interface DataType {
     key: string | number;
-    id: string;
+    _id: string;
     name: string;
     description: string;
 }
@@ -22,7 +22,7 @@ console.log(props.categories);
             title: 'Categories Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text, record) => <Link to={`/categories/${record.id}`} >{text}</Link>,
+            render: (text, record) => <Link to={`/categories/${record._id}`} >{text}</Link>,
         },        
         {
             title: 'Categories description',
@@ -35,7 +35,7 @@ console.log(props.categories);
             render: (record) => (
 
                 <Space size="middle">
-                    <Button type="primary" style={{ backgroundColor: 'red' }} onClick={() => removeCate(record.id)}>Remove</Button>
+                    <Button type="primary" style={{ backgroundColor: 'red' }} onClick={() => removeCate(record._id)}>Remove</Button>
                     <Button style={{ backgroundColor: 'darkblue' }} type="primary" ><Link to={`/admin/categories/${record._id}/update`}>Update</Link></Button>
                 </Space>
             ),
@@ -44,7 +44,7 @@ console.log(props.categories);
 
     const data: DataType[] = props.categories.map((item: ICategory) => {
         return {
-            key: item.id,
+            key: item._id,
             ...item
 
         }

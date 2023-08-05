@@ -1,24 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getOneProduct } from "../../api/product";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { IProduct } from "../../interfaces/product";
+import { ICategory } from "../../interfaces/category";
+  interface IProps{
+    products: IProduct[]
+    categories: ICategory[]
+  }
+const DetailPage = (props:IProps) => {
 
-const DetailPage = () => {
-  const { id } = useParams();
-  const dispatch = useDispatch();
-
-  const { products } = useSelector((state: any) => state.product);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const data = await getOneProduct(id as string);
-      console.log("data", data.data);
-
-      dispatch({ type: "product-get-by-id", payload: { products: data.data } });
-    };
-    getProducts();
-  }, []);
+  
+    const { id } = useParams()
+    const [product, setProduct] = useState<IProduct>()
+    useEffect(() => {  
+      setProduct(props.products.find((product: IProduct) => product._id == String(id)))
+    }, [props, id])
+    const productCate =  product?.categoryId.map(item=>item._id)
+    const categories = props.categories.filter(category => productCate?.includes(category._id));
+  
 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-white">
@@ -27,11 +28,11 @@ const DetailPage = () => {
           <img
             alt="ecommerce"
             className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-            src={products.images}
+            src={product?.images[0]}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              {products.name}
+              {product?.name}
             </h1>
             <div className="flex mb-4">
               <span className="flex items-center">
@@ -90,7 +91,6 @@ const DetailPage = () => {
                 >
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
-                <span className="text-gray-600 ml-3">{products.evaluate}</span>
               </span>
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
                 <a className="text-gray-500">
@@ -132,9 +132,9 @@ const DetailPage = () => {
               </span>
             </div>
             <div
-              dangerouslySetInnerHTML={{ __html: products.description }}
+               
               className="leading-relaxed"
-            ></div>
+            >{product?.description}</div>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
               <div className="flex">
                 <span className="mr-3">Color</span>
@@ -169,7 +169,7 @@ const DetailPage = () => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                {products.price}
+                {product?.price}
               </span>
               <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
                 Buy

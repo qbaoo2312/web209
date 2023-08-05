@@ -47,7 +47,7 @@ const categoryReducer = (
       state = {
         ...state,
         categories: state.categories.map((item) =>
-          item.id === action.payload.id ? { ...item, ...action.payload } : item
+          item._id === action.payload._id ? { ...item, ...action.payload } : item
         ),
       };
       break;
@@ -55,7 +55,7 @@ const categoryReducer = (
       state = {
         ...state,
         categories: state.categories.filter(
-          (item) => item.id !== action.payload
+          (item) => item._id !== action.payload
         ),
       };
       break;

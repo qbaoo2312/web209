@@ -21,7 +21,7 @@ const UpdateCategoryPage = (props: IProps) => {
   const { id } = useParams()
   const navigate = useNavigate()
   useEffect(() => {
-    setCate(props.categories.find((category: ICategory) => category.id === String(id)))
+    setCate(props.categories.find((category: ICategory) => category._id === String(id)))
   }
     , [props, id])
 
@@ -33,7 +33,7 @@ const UpdateCategoryPage = (props: IProps) => {
 
   const setFields = () => {
     form.setFieldsValue({
-      id: cate?.id,
+      id: cate?._id,
       name: cate?.name,
       description: cate?.description,
     })

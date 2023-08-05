@@ -71,7 +71,7 @@ const AddProductPage = (props: IProps) => {
         >
           <Select  mode='multiple'>
             {props.categories.map((item, index) => {
-              return <Select.Option key={index} value={item.id}>{item.name}</Select.Option>
+              return <Select.Option key={index} value={item._id}>{item.name}</Select.Option>
             })}
           </Select>
         </Form.Item>

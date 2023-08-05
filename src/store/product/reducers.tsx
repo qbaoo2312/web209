@@ -41,13 +41,13 @@ type ICombineAction = GetListProductAction | AddProductAction | UpdateProductAct
         case 'update-product':
             state = {
                 ...state,
-                products: state.products.map(item => item.id === action.payload.id ? { ...item, ...action.payload } : item),
+                products: state.products.map(item => item._id === action.payload._id ? { ...item, ...action.payload } : item),
             }
             break;
         case 'delete-product':
             state = {
                 ...state,
-                products: state.products.filter(item => item.id !== action.payload),
+                products: state.products.filter(item => item._id !== action.payload),
             }
             break;
 

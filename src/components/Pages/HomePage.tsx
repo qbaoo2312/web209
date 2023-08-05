@@ -3,26 +3,18 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getAllProduct } from "../../api/product";
 import { Link } from "react-router-dom";
+import { IProduct } from "../../interfaces/product";
 
-const HomePage = () => {
-  const disaptch = useDispatch();
+interface IProps{
+  products: IProduct[]
+}
+const HomePage = (props: IProps) => {
 
-  const products = useSelector((state: any) => state.product);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const data = await getAllProduct();
-      disaptch({ type: "product-get-list", payload: { products: data.data } });
-    };
-    getProducts();
-  }, []);
-
-  console.log(products);
 
   return (
     <div className="grid grid-cols-3 gap-5">
-      {products?.products.map((product: any) => (
-        <div className="bg-white">
+      {props.products.map((product: any) => (
+        <div key={product._id} className="bg-white">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
             <div className="">
               <div className="group relative">
@@ -40,7 +32,7 @@ const HomePage = () => {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link to={`/products/${product.id}`}>
+                      <Link to={`/products/${product._id}`}>
                         <span
                           aria-hidden="true"
                           className="absolute inset-0"
